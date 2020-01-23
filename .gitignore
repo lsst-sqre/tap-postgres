@@ -1,3 +1,3 @@
 tap/.gradle
 tap/build
-docker/tap/tap-1.1.war
+docker/tap/tap.war
