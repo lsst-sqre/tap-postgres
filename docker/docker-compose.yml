@@ -1,0 +1,19 @@
+version: '3.2'
+services:
+  tap-service:
+    image: lsstdax/tap-postgres-server:dev
+    depends_on:
+      - tap-db
+    ports:
+      - '8080:8080'
+    networks:
+      - tap-network
+    environment:
+      CATALINA_OPTS: "-Dtap.username=tap_schema -Dtap.password=pw-tapschema -Dtap.url=jdbc:postgresql://tap-db:5432/tap_schema -Dca.nrc.cadc.reg.client.RegistryClient.local=true -Dtap.maxActive=1"
+  tap-db:
+    image: lsstdax/tap-postgres-db:dev
+    networks:
+      - tap-network
+
+networks:
+  tap-network:
