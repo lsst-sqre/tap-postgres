@@ -1,3 +1,4 @@
 tap/.gradle
 tap/build
 docker/tap/tap.war
+docker/google_creds.json

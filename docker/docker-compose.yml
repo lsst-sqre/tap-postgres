@@ -8,8 +8,11 @@ services:
       - '8080:8080'
     networks:
       - tap-network
+    volumes:
+      - './google_creds.json:/etc/creds/google_creds.json'
     environment:
-      CATALINA_OPTS: "-Dtap.username=tap_schema -Dtap.password=pw-tapschema -Dtap.url=jdbc:postgresql://tap-db:5432/tap_schema -Dca.nrc.cadc.reg.client.RegistryClient.local=true -Dtap.maxActive=1"
+      CATALINA_OPTS: "-Dtap.username=tap_schema -Dtap.password=pw-tapschema -Dtap.url=jdbc:postgresql://tap-db:5432/tap_schema -Dca.nrc.cadc.reg.client.RegistryClient.local=true -Dtap.maxActive=1 -Dgcs_bucket_url=http://async-results.lsst.codes -Dgcs_bucket=async-results.lsst.codes"
+      GOOGLE_APPLICATION_CREDENTIALS: "/etc/creds/google_creds.json"
   tap-db:
     image: lsstdax/tap-postgres-db:dev
     networks:
