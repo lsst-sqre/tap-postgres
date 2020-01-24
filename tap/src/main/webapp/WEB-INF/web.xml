@@ -109,7 +109,7 @@
     <servlet-class>ca.nrc.cadc.uws.server.JobServlet</servlet-class>
         <init-param>
             <param-name>ca.nrc.cadc.uws.server.JobManager</param-name>
-            <param-value>ca.nrc.cadc.sample.SampleJobManager</param-value>
+            <param-value>ca.nrc.cadc.sample.JobManager</param-value>
         </init-param>
         <!--
         <init-param>
@@ -137,7 +137,7 @@
         <servlet-class>ca.nrc.cadc.uws.server.JobServlet</servlet-class>
         <init-param>
             <param-name>ca.nrc.cadc.uws.server.JobManager</param-name>
-            <param-value>ca.nrc.cadc.sample.SampleJobManager</param-value>
+            <param-value>ca.nrc.cadc.sample.JobManager</param-value>
         </init-param>
         <!--
         <init-param>

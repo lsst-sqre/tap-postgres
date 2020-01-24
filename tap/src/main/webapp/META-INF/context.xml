@@ -19,20 +19,18 @@
         testWhileIdle="true" testOnBorrow="true" validationQuery="select 123" />
     -->
 
-    <!-- connection pool for create/modify jobs via DatabaseJobPersistence implementation -->    
-    <!--
+    <!-- connection pool for create/modify jobs via DatabaseJobPersistence implementation -->
     <Resource name="jdbc/uws"
         auth="Container"
         type="javax.sql.DataSource"
         factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" closeMethod="close"
         minEvictableIdleTimeMillis="60000" timeBetweenEvictionRunsMillis="30000"
         maxWait="20000"
-        initialSize="0" minIdle="0" maxIdle="${example.uws.maxActive}" maxActive="${example.uws.maxActive}"
-        username="${example.uws.username}" password="${example.uws.password}"
-        driverClassName="org.postgresql.Driver" url="${example.uws.url}"
+        initialSize="0" minIdle="0" maxIdle="${uws.maxActive}" maxActive="${uws.maxActive}"
+        username="${uws.username}" password="${uws.password}"
+        driverClassName="org.postgresql.Driver" url="${uws.url}"
         removeAbandoned="false"
         testOnBorrow="true" validationQuery="select 123" />
-    -->
 
     <!-- connection pool for executing TAP queries, including create/load of tables in tap_upload -->
     <Resource name="jdbc/tapuser"
