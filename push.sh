@@ -14,6 +14,8 @@ echo "Pushing all images with tag $TAG"
 
 docker tag lsstdax/tap-postgres-server:dev lsstdax/tap-postgres-server:$TAG
 docker tag lsstdax/tap-postgres-db:dev lsstdax/tap-postgres-db:$TAG
+docker tag lsstdax/tap-postgres-uws:dev lsstdax/tap-postgres-uws:$TAG
 
 docker push lsstdax/tap-postgres-server:$TAG
 docker push lsstdax/tap-postgres-db:$TAG
+docker push lsstdax/tap-postgres-uws:$TAG
