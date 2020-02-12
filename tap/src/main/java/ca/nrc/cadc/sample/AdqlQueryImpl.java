@@ -77,6 +77,7 @@ import ca.nrc.cadc.tap.parser.navigator.ExpressionNavigator;
 import ca.nrc.cadc.tap.parser.navigator.FromItemNavigator;
 import ca.nrc.cadc.tap.parser.navigator.ReferenceNavigator;
 import ca.nrc.cadc.tap.parser.navigator.SelectNavigator;
+import ca.nrc.cadc.tap.parser.region.pgsphere.PgsphereRegionConverter;
 import org.apache.log4j.Logger;
 
 /**
@@ -113,7 +114,8 @@ public class AdqlQueryImpl extends AdqlQuery
         tnc.put("tap_schema.key_columns", "tap_schema.key_columns11");
         TableNameReferenceConverter tnrc = new TableNameReferenceConverter(tnc.map);
         super.navigatorList.add(new SelectNavigator(new ExpressionNavigator(), tnrc, tnc));
-        
+        super.navigatorList.add(new PgsphereRegionConverter(new ExpressionNavigator(), new ReferenceNavigator(), new FromItemNavigator()));
+
         // TODO: add more custom query visitors here
     }
 }

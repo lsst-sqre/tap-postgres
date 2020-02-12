@@ -16,7 +16,7 @@ CREATE TABLE tap_schema.obscore
    s_ra DOUBLE PRECISION,
    s_dec DOUBLE PRECISION,
    s_fov DOUBLE PRECISION,
-   s_region VARCHAR(2048),
+   s_region spoly,
    s_resolution DOUBLE PRECISION,
    s_xel1 DOUBLE PRECISION,
    s_xel2 DOUBLE PRECISION,
