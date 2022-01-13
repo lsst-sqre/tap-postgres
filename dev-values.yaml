@@ -1,0 +1,22 @@
+tag: dev
+
+imagePullPolicy: Never
+host: "minikube.lsst.codes"
+
+ingress:
+  authenticated_annotations:
+    nginx.ingress.kubernetes.io/auth-response-headers: X-Auth-Request-Uid, X-Auth-Request-Token
+    nginx.ingress.kubernetes.io/auth-url: "https://minikube.lsst.codes/auth?scope=read:tap&auth_type=basic&delegate_to=tap"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      auth_request_set $auth_token $upstream_http_x_auth_request_token;
+      proxy_set_header Authorization "Bearer $auth_token";
+
+secrets:
+  enabled: false
+
+vault_secrets:
+  enabled: true
+  path: 'secret/k8s_operator/minikube.lsst.codes/tap'
+
+gcs_bucket: 'async-results.lsst.codes'
+gcs_bucket_url: 'http://async-results.lsst.codes'

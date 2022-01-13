@@ -12,7 +12,7 @@ services:
     volumes:
       - './google_creds.json:/etc/creds/google_creds.json'
     environment:
-      CATALINA_OPTS: "-Dtap.username=tap_schema -Dtap.password=pw-tapschema -Dtap.url=jdbc:postgresql://tap-db:5432/tap_schema -Dca.nrc.cadc.reg.client.RegistryClient.local=true -Dtap.maxActive=1 -Dgcs_bucket_url=http://async-results.lsst.codes -Dgcs_bucket=async-results.lsst.codes -Duws.username=postgres -Duws.maxActive=2 -Duws.jdbc.driverClassName=org.postgresql.Driver -Duws.url=jdbc:postgresql://uws/"
+      CATALINA_OPTS: "-Dtap.username=tap_schema -Dtap.password=pw-tapschema -Dtap.url=jdbc:postgresql://tap-db:5432/tap_schema -Dca.nrc.cadc.reg.client.RegistryClient.local=true -Dtap.maxActive=1 -Dgcs_bucket_url=http://async-results.lsst.codes -Dgcs_bucket=async-results.lsst.codes -Duws.username=postgres -Duws.maxActive=2 -Duws.jdbc.driverClassName=org.postgresql.Driver -Duws.url=jdbc:postgresql://uws/ -Dca.nrc.cadc.auth.Authenticator=ca.nrc.cadc.sample.AuthenticatorImpl -Dca.nrc.cadc.reg.client.RegistryClient.local=true"
       GOOGLE_APPLICATION_CREDENTIALS: "/etc/creds/google_creds.json"
   tap-db:
     image: lsstdax/tap-postgres-db:dev
