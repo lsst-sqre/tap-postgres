@@ -70,7 +70,7 @@
 package ca.nrc.cadc.sample;
 
 import ca.nrc.cadc.vosi.AvailabilityPlugin;
-import ca.nrc.cadc.vosi.AvailabilityStatus;
+import ca.nrc.cadc.vosi.Availability;
 import ca.nrc.cadc.vosi.avail.CheckDataSource;
 import ca.nrc.cadc.vosi.avail.CheckException;
 import org.apache.log4j.Logger;
@@ -108,7 +108,7 @@ public class SampleWebService implements AvailabilityPlugin
         return true;
     }
     
-    public AvailabilityStatus getStatus()
+    public Availability getStatus()
     {
         boolean isGood = true;
         String note = "service is accepting queries";
@@ -141,7 +141,7 @@ public class SampleWebService implements AvailabilityPlugin
             isGood = false;
             note = "test failed, reason: " + t;
         }
-        return new AvailabilityStatus(isGood, null, null, null, note);
+        return new Availability(isGood, note);
     }
 
     public void setState(String string)
