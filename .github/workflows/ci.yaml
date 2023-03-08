@@ -20,16 +20,46 @@ jobs:
         id: print
         run: echo ${{ steps.vars.outputs.tag }}
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_TOKEN }}
-
       - name: Run the build
         id: build
         run: ./build.sh
 
-      - name: Push the images
-        id: push
-        run: ./push.sh `./docker-tag.sh $GITHUB_REF`
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push the TAP server image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          file: docker/tap/Dockerfile
+          tags: |
+            ghcr.io/lsstdax/tap-postgres-service:${{ steps.vars.outputs.tag }}
+          cache-from: type=gha,scope=tap
+          cache-to: type=gha,mode=max,scope=tap
+
+      - name: Build and push the UWS database image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          file: docker/uws/Dockerfile
+          tags: |
+            ghcr.io/lsstdax/tap-postgres-uws:${{ steps.vars.outputs.tag }}
+          cache-from: type=gha,scope=uws-db
+          cache-to: type=gha,mode=max,scope=uws-db
+
+      - name: Build and push the mock postgres image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          file: docker/postgresql/Dockerfile
+          tags: |
+            ghcr.io/lsstdax/tap-postgres-db:${{ steps.vars.outputs.tag }}
+          cache-from: type=gha,scope=postgresql
+          cache-to: type=gha,mode=max,scope=postgresql
