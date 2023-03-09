@@ -20,9 +20,8 @@ jobs:
         id: print
         run: echo ${{ steps.vars.outputs.tag }}
 
-      - name: Run the build
-        id: build
-        run: ./build.sh
+      - name: Build and test
+        run: ./scripts/build-war.sh
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v2
@@ -34,7 +33,7 @@ jobs:
       - name: Build and push the TAP server image
         uses: docker/build-push-action@v4
         with:
-          context: .
+          context: docker/tap
           push: true
           file: docker/tap/Dockerfile
           tags: |
@@ -43,7 +42,7 @@ jobs:
       - name: Build and push the UWS database image
         uses: docker/build-push-action@v4
         with:
-          context: .
+          context: docker/uws
           push: true
           file: docker/uws/Dockerfile
           tags: |
@@ -52,7 +51,7 @@ jobs:
       - name: Build and push the mock postgres image
         uses: docker/build-push-action@v4
         with:
-          context: .
+          context: docker/cadc-postgresql-dev
           push: true
           file: docker/cadc-postgresql-dev/Dockerfile.pg12
           tags: |
