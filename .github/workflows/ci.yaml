@@ -39,8 +39,6 @@ jobs:
           file: docker/tap/Dockerfile
           tags: |
             ghcr.io/lsst-sqre/tap-postgres-service:${{ steps.vars.outputs.tag }}
-          cache-from: type=gha,scope=tap
-          cache-to: type=gha,mode=max,scope=tap
 
       - name: Build and push the UWS database image
         uses: docker/build-push-action@v4
@@ -50,8 +48,6 @@ jobs:
           file: docker/uws/Dockerfile
           tags: |
             ghcr.io/lsst-sqre/tap-postgres-uws:${{ steps.vars.outputs.tag }}
-          cache-from: type=gha,scope=uws-db
-          cache-to: type=gha,mode=max,scope=uws-db
 
       - name: Build and push the mock postgres image
         uses: docker/build-push-action@v4
@@ -61,5 +57,3 @@ jobs:
           file: docker/cadc-postgresql-dev/Dockerfile.pg12
           tags: |
             ghcr.io/lsst-sqre/tap-postgres-db:${{ steps.vars.outputs.tag }}
-          cache-from: type=gha,scope=postgresql
-          cache-to: type=gha,mode=max,scope=postgresql
