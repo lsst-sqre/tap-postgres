@@ -38,7 +38,7 @@ jobs:
           push: true
           file: docker/tap/Dockerfile
           tags: |
-            ghcr.io/lsstdax/tap-postgres-service:${{ steps.vars.outputs.tag }}
+            ghcr.io/lsst-sqre/tap-postgres-service:${{ steps.vars.outputs.tag }}
           cache-from: type=gha,scope=tap
           cache-to: type=gha,mode=max,scope=tap
 
@@ -49,7 +49,7 @@ jobs:
           push: true
           file: docker/uws/Dockerfile
           tags: |
-            ghcr.io/lsstdax/tap-postgres-uws:${{ steps.vars.outputs.tag }}
+            ghcr.io/lsst-sqre/tap-postgres-uws:${{ steps.vars.outputs.tag }}
           cache-from: type=gha,scope=uws-db
           cache-to: type=gha,mode=max,scope=uws-db
 
@@ -60,6 +60,6 @@ jobs:
           push: true
           file: docker/cadc-postgresql-dev/Dockerfile.pg12
           tags: |
-            ghcr.io/lsstdax/tap-postgres-db:${{ steps.vars.outputs.tag }}
+            ghcr.io/lsst-sqre/tap-postgres-db:${{ steps.vars.outputs.tag }}
           cache-from: type=gha,scope=postgresql
           cache-to: type=gha,mode=max,scope=postgresql
