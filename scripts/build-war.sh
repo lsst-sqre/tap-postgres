@@ -8,4 +8,4 @@ cd tap
 
 # Build the TAP service and docker images.
 gradle --stacktrace --info clean assemble javadoc build test
-cp build/libs/*.war ../docker/tap
+cp build/libs/*.war ../docker/tap/tap.war
