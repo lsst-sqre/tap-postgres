@@ -86,7 +86,7 @@ public class SampleWebService implements AvailabilityPlugin
 {
     private static final Logger log = Logger.getLogger(SampleWebService.class);
     
-    private static String TAPDS_NAME = "jdbc/tapuser";
+    private static String TAPDS_NAME = "jdbc/tapschemauser";
     // note tap_schema table names
     private String TAPDS_TEST = "select schema_name from tap_schema.schemas11 where schema_name='tap_schema'";
     
