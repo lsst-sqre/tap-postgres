@@ -3,7 +3,6 @@ package ca.nrc.cadc.sample;
 
 
 import ca.nrc.cadc.auth.X500IdentityManager;
-import ca.nrc.cadc.tap.QueryRunner;
 import ca.nrc.cadc.uws.server.JobExecutor;
 import ca.nrc.cadc.uws.server.impl.PostgresJobPersistence;
 import ca.nrc.cadc.uws.server.SimpleJobManager;
