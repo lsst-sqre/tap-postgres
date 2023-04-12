@@ -186,7 +186,7 @@
     <servlet>
         <load-on-startup>3</load-on-startup>
         <servlet-name>TableServlet</servlet-name>
-        <servlet-class>ca.nrc.cadc.vosi.TableServlet</servlet-class>
+        <servlet-class>ca.nrc.cadc.sample.RubinTableServlet</servlet-class>
     </servlet>
     
     <servlet-mapping>
