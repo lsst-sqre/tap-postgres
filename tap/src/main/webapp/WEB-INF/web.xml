@@ -111,12 +111,10 @@
             <param-name>ca.nrc.cadc.uws.server.JobManager</param-name>
             <param-value>ca.nrc.cadc.sample.JobManager</param-value>
         </init-param>
-        <!--
         <init-param>
             <param-name>ca.nrc.cadc.rest.InlineContentHandler</param-name>
-            <param-value>fully qualified class name of a TapUploadInlineContentHandler</param-value>
+            <param-value>ca.nrc.cadc.sample.UploadManager</param-value>
         </init-param>
-        -->
         <init-param>
             <param-name>get</param-name>
             <param-value>ca.nrc.cadc.uws.web.GetAction</param-value>
@@ -139,12 +137,10 @@
             <param-name>ca.nrc.cadc.uws.server.JobManager</param-name>
             <param-value>ca.nrc.cadc.sample.JobManager</param-value>
         </init-param>
-        <!--
         <init-param>
             <param-name>ca.nrc.cadc.rest.InlineContentHandler</param-name>
-            <param-value>fully qualified class name of a TapUploadInlineContentHandler</param-value>
+            <param-value>ca.nrc.cadc.sample.UploadManager</param-value>
         </init-param>
-        -->
         <init-param>
             <param-name>get</param-name>
             <param-value>ca.nrc.cadc.uws.web.SyncGetAction</param-value>
