@@ -3,7 +3,7 @@
 *******************  CANADIAN ASTRONOMY DATA CENTRE  *******************
 **************  CENTRE CANADIEN DE DONNÉES ASTRONOMIQUES  **************
 *
-*  (c) 2011.                            (c) 2011.
+*  (c) 2019.                            (c) 2019.
 *  Government of Canada                 Gouvernement du Canada
 *  National Research Council            Conseil national de recherches
 *  Ottawa, Canada, K1A 0R6              Ottawa, Canada, K1A 0R6
@@ -69,52 +69,107 @@
 
 package ca.nrc.cadc.sample;
 
-import ca.nrc.cadc.tap.AdqlQuery;
-import ca.nrc.cadc.tap.parser.converter.TableNameConverter;
-import ca.nrc.cadc.tap.parser.converter.TableNameReferenceConverter;
-import ca.nrc.cadc.tap.parser.converter.TopConverter;
 import ca.nrc.cadc.tap.parser.navigator.ExpressionNavigator;
 import ca.nrc.cadc.tap.parser.navigator.FromItemNavigator;
 import ca.nrc.cadc.tap.parser.navigator.ReferenceNavigator;
-import ca.nrc.cadc.tap.parser.navigator.SelectNavigator;
+import ca.nrc.cadc.tap.parser.region.pgsphere.PgsphereRegionConverter;
+import ca.nrc.cadc.tap.parser.region.pgsphere.function.Interval;
+import ca.nrc.cadc.tap.schema.TapSchema;
+import net.sf.jsqlparser.expression.DoubleValue;
+import net.sf.jsqlparser.expression.Expression;
+import net.sf.jsqlparser.schema.Column;
+import net.sf.jsqlparser.schema.Table;
 import org.apache.log4j.Logger;
 
 /**
- * TAP service implementors must implement this class and add customisations of the 
- * navigatorlist as shown below. Custom query visitors can be used to validate or modify
- * the query; the base class runs all the visitors in the navigatorlist once before 
- * converting the result into SQL for execution.
+ * convert predicate functions into ObsCore implementation
+ * 
+ * @author cbanek
  *
- * @author pdowler
  */
-public class AdqlQueryImpl extends AdqlQuery
+public class ObsCoreRegionConverter extends PgsphereRegionConverter
 {
-    private static Logger log = Logger.getLogger(AdqlQueryImpl.class);
+    private static Logger log = Logger.getLogger(ObsCoreRegionConverter.class);
 
-    public AdqlQueryImpl()
+    public ObsCoreRegionConverter()
     {
-        super();
+        super(new ExpressionNavigator(), new ReferenceNavigator(), new FromItemNavigator());
+    }
+    
+    /**
+     * This method is called when a CONTAINS is found.
+     * This could occur if the query had CONTAINS(...) in the select list or as
+     * part of an arithmetic expression or aggregate function (since CONTAINS 
+     * returns a numeric value). 
+     * 
+     * @param left 
+     * @param right
+     * @return replacement expression
+     */
+    @Override
+    protected Expression handleContains(Expression left, Expression right)
+    {
+        log.debug("handleContains: " + left  + " " + right);
+        RewriteRegionColumns(left, right);
+        
+        if (right instanceof Interval)
+        {
+            if (left instanceof Column || left instanceof Interval)
+            {   
+                // OK
+            }
+            else if (left instanceof DoubleValue)
+            {
+                DoubleValue dv = (DoubleValue) left;
+                double d = dv.getValue();
+                double d1 = Double.longBitsToDouble(Double.doubleToLongBits(d) - 1L);
+                double d2 = Double.longBitsToDouble(Double.doubleToLongBits(d) + 1L);
+                Interval p = new Interval(new DoubleValue(Double.toString(d1)), new DoubleValue(Double.toString(d2)));
+                return super.handleIntersects(p, right);
+            }
+            else
+                throw new IllegalArgumentException("invalid argument type for contains: " + left.getClass().getSimpleName() + " Interval");
+        }
+        return super.handleContains(left, right);
+    }
+      
+    /**
+     * This method is called when a INTERSECTS is found.
+     * This could occur if the query had INTERSECTS(...) in the select list or as
+     * part of an arithmetic expression or aggregate function (since INTERSECTS 
+     * returns a numeric value). 
+     * 
+     * @param left
+     * @param right
+     * 
+     * @return replacement expression
+     */
+    @Override
+    protected Expression handleIntersects(Expression left, Expression right)
+    {
+        log.debug("handleIntersects: " + left  + " " + right);
+        RewriteRegionColumns(left, right);
+        return super.handleIntersects(left, right);
     }
 
     @Override
-    protected void init()
+    protected Expression handleInterval(Expression lower, Expression upper)
     {
-        super.init();
+        return new Interval(lower, upper);
+    }
 
-        // example: for postgresql we have to convert TOP to LIMIT
-        super.navigatorList.add(new TopConverter(new ExpressionNavigator(), new ReferenceNavigator(), new FromItemNavigator()));
+    private void RewriteRegionColumns(Expression left, Expression right) {
+        // column renaming
+        RewriteRegionColumn(left);
+        RewriteRegionColumn(right);
+    }
 
-        // TAP-1.1 tap_schema version is encoded in table names
-        TableNameConverter tnc = new TableNameConverter(true);
-        tnc.put("tap_schema.schemas", "tap_schema.schemas11");
-        tnc.put("tap_schema.tables", "tap_schema.tables11");
-        tnc.put("tap_schema.columns", "tap_schema.columns11");
-        tnc.put("tap_schema.keys", "tap_schema.keys11");
-        tnc.put("tap_schema.key_columns", "tap_schema.key_columns11");
-        TableNameReferenceConverter tnrc = new TableNameReferenceConverter(tnc.map);
-        super.navigatorList.add(new SelectNavigator(new ExpressionNavigator(), tnrc, tnc));
-        super.navigatorList.add(new ObsCoreRegionConverter());
-
-        // TODO: add more custom query visitors here
+    private void RewriteRegionColumn(Expression e) {
+        if (e instanceof Column)
+        {
+            Column c = (Column) e;
+            if (c.getColumnName().equalsIgnoreCase("s_region"))
+                c.setColumnName("pgs_region");
+        }
     }
 }
