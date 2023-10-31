@@ -77,6 +77,8 @@ import ca.nrc.cadc.tap.parser.region.pgsphere.function.Interval;
 import ca.nrc.cadc.tap.schema.TapSchema;
 import net.sf.jsqlparser.expression.DoubleValue;
 import net.sf.jsqlparser.expression.Expression;
+import net.sf.jsqlparser.expression.Function;
+import net.sf.jsqlparser.expression.StringValue;
 import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.schema.Table;
 import org.apache.log4j.Logger;
@@ -156,6 +158,19 @@ public class ObsCoreRegionConverter extends PgsphereRegionConverter
     protected Expression handleInterval(Expression lower, Expression upper)
     {
         return new Interval(lower, upper);
+    }
+
+    /**
+     * This method is called when COORDSYS function is found.
+     *
+     * @param adqlFunction the COORDSYS expression
+     * @return replacement expression
+     */
+    @Override
+    protected Expression handleCoordSys(Function adqlFunction)
+    {
+        log.debug("handleCoordSys: " + adqlFunction);
+        return new StringValue("'ICRS'");
     }
 
     private void RewriteRegionColumns(Expression left, Expression right) {
