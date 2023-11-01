@@ -79,6 +79,7 @@ import net.sf.jsqlparser.expression.DoubleValue;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.Function;
 import net.sf.jsqlparser.expression.StringValue;
+import net.sf.jsqlparser.expression.operators.relational.ExpressionList;
 import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.schema.Table;
 import org.apache.log4j.Logger;
@@ -158,6 +159,34 @@ public class ObsCoreRegionConverter extends PgsphereRegionConverter
     protected Expression handleInterval(Expression lower, Expression upper)
     {
         return new Interval(lower, upper);
+    }
+
+    /**
+     * CENTROID(s_region) is converted to pgs_center
+     *
+     * @param adqlFunction
+     * @return replacement expression
+     */
+    @Override
+    protected Expression handleCentroid(Function adqlFunction)
+    {
+        log.debug("handleCentroid: " + adqlFunction);
+
+        ExpressionList el = adqlFunction.getParameters();
+
+        if (el.getExpressions().size() == 1)
+        {
+	    Expression e = (Expression) el.getExpressions().get(0);
+            if (e instanceof Column) {
+                Column c = (Column) e;
+                if (c.getColumnName() == "s_region") {
+                    c.setColumnName("pgs_center");
+                    return c;
+                }
+            }
+        }
+
+        throw new UnsupportedOperationException("CENTROID() used with unsupported parameter.");
     }
 
     /**
