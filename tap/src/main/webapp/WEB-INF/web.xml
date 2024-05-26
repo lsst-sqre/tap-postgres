@@ -134,6 +134,10 @@
         <servlet-name>SyncServlet</servlet-name>
         <servlet-class>ca.nrc.cadc.uws.server.JobServlet</servlet-class>
         <init-param>
+            <param-name>init</param-name>
+            <param-value>org.opencadc.sia2.UWSInitAction</param-value>
+        </init-param>
+        <init-param>
             <param-name>ca.nrc.cadc.uws.server.JobManager</param-name>
             <param-value>ca.nrc.cadc.sample.JobManager</param-value>
         </init-param>
