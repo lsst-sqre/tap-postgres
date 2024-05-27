@@ -65,7 +65,7 @@
 ************************************************************************
 */
 
-package org.opencadc.sia2;
+package org.opencadc.uws.impl;
 
 import ca.nrc.cadc.db.DBUtil;
 import ca.nrc.cadc.rest.InitAction;
