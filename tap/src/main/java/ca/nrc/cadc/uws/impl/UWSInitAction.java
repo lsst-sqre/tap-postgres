@@ -96,6 +96,7 @@ public class UWSInitAction extends InitAction {
             uws = DBUtil.findJNDIDataSource("jdbc/uws");
             conn = uws.getConnection();
             if (!schemaExists(conn, "uws")) {
+                log.info("uws schema does not exist, creating...");
                 createSchema(conn, "uws");
                 log.info("uws schema created");
 
