@@ -65,7 +65,7 @@
 ************************************************************************
 */
 
-package org.opencadc.uws.impl;
+package ca.nrc.cadc.uws.impl;
 
 import ca.nrc.cadc.db.DBUtil;
 import ca.nrc.cadc.rest.InitAction;
@@ -85,7 +85,7 @@ import java.sql.SQLException;
 public class UWSInitAction extends InitAction {
     private static final Logger log = Logger.getLogger(UWSInitAction.class);
 
-    public UWSInitAction() { 
+    public UWSInitAction() {
     }
 
     @Override

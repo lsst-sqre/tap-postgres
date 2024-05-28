@@ -135,7 +135,7 @@
         <servlet-class>ca.nrc.cadc.uws.server.JobServlet</servlet-class>
         <init-param>
             <param-name>init</param-name>
-            <param-value>org.opencadc.uws.impl.UWSInitAction</param-value>
+            <param-value>ca.nrc.cadc.uws.impl.UWSInitAction</param-value>
         </init-param>
         <init-param>
             <param-name>ca.nrc.cadc.uws.server.JobManager</param-name>
