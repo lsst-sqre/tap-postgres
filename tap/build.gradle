@@ -54,6 +54,3 @@ configurations {
   runtime.exclude group: 'net.sourceforge.jtds'
   runtime.exclude group: 'org.restlet.jee'
 }
-
-
-
