@@ -6,7 +6,17 @@ Find changes for the upcoming release in the project's [changelog.d](https://git
 
 <!-- scriv-insert-here -->
 
-<a id='changelog-8.1.0'></a>
+
+<a id='changelog-1.17.0'></a>
+## 1.17.0 (2024-06-07)	
+
+### New features
+
+- Updated cadc libraries to more recent version. Moved to using the cadc-tomcat Docker image
+
+
+
+<a id='changelog-1.16.0'></a>
 ## 1.16.0 (2024-05-30)
 
 ### New features

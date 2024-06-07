@@ -1,4 +1,3 @@
-
 /*
  ************************************************************************
  *******************  CANADIAN ASTRONOMY DATA CENTRE  *******************
@@ -92,7 +91,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class ResultStoreImpl implements ResultStore {
     private String filename;
-    private String jobID;
     private static final String bucket = System.getProperty("gcs_bucket");
     private static final String bucketURL = System.getProperty("gcs_bucket_url");
     private static final String baseURL = System.getProperty("base_url");
@@ -137,7 +135,7 @@ public class ResultStoreImpl implements ResultStore {
     private OutputStream getOutputStream() {
         Storage storage = StorageOptions.getDefaultInstance().getService();
         BlobId blobId = BlobId.of(bucket, filename);
-        
+
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("application/x-votable+xml").build();
         Blob blob = storage.create(blobInfo);
         return Channels.newOutputStream(blob.writer());
@@ -159,10 +157,5 @@ public class ResultStoreImpl implements ResultStore {
     public void setFilename(String filename) {
         this.filename = filename;
     }
-
-    public void setJobID(String jobID) {
-        this.jobID = jobID;
-    }
-
 
 }
