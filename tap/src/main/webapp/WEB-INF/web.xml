@@ -193,6 +193,17 @@
             <servlet-name>SyncServlet</servlet-name>
             <url-pattern>/sync/*</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ResultsServlet</servlet-name>
+        <servlet-class>ca.nrc.cadc.sample.ResultsServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+            <servlet-name>ResultsServlet</servlet-name>
+            <url-pattern>/results/*</url-pattern>
+    </servlet-mapping>
+    
     <servlet-mapping>
             <servlet-name>AsyncServlet</servlet-name>
             <url-pattern>/async/*</url-pattern>
