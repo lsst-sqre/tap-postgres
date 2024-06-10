@@ -72,6 +72,9 @@ package ca.nrc.cadc.sample;
 import ca.nrc.cadc.tap.AdqlQuery;
 import ca.nrc.cadc.tap.parser.converter.TableNameConverter;
 import ca.nrc.cadc.tap.parser.converter.TableNameReferenceConverter;
+import ca.nrc.cadc.tap.parser.BaseExpressionDeParser;
+import ca.nrc.cadc.tap.parser.PgsphereDeParser;
+import net.sf.jsqlparser.util.deparser.SelectDeParser;
 import ca.nrc.cadc.tap.parser.converter.TopConverter;
 import ca.nrc.cadc.tap.parser.navigator.ExpressionNavigator;
 import ca.nrc.cadc.tap.parser.navigator.FromItemNavigator;
@@ -117,4 +120,10 @@ public class AdqlQueryImpl extends AdqlQuery
 
         // TODO: add more custom query visitors here
     }
+
+    @Override
+    protected BaseExpressionDeParser getExpressionDeparser(SelectDeParser dep, StringBuffer sb) {
+        return new PgsphereDeParser(dep, sb);
+    }
+
 }
