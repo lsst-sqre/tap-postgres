@@ -168,18 +168,54 @@ public class AdqlQueryImplTest
         }
     }
     
+    // Test that a query using size works as expected (No quotes)
+    @Test
+    public void testQueryWithSizeConverter()
+    {
+        try
+        {
+            job.getParameterList().add(new Parameter("QUERY", "select top 5 * from test.tables as t"));
+
+            AdqlQueryImpl q = new AdqlQueryImpl();
+            q.setJob(job);
+            q.setTapSchema(mockTapSchema());
+
+            String sql = q.getSQL();
+            log.debug("SQL: " + sql);
+            Assert.assertNotNull("sql", sql);
+            sql = sql.toLowerCase();
+            int i = sql.indexOf("select") + 6;
+            int j = sql.indexOf("from") - 1;
+            String selectList = sql.substring(i, j);
+            log.debug("select-list: " + selectList);
+            Assert.assertTrue(selectList.contains("t.size"));
+        }
+        catch(Exception unexpected)
+        {
+            log.error("unexpected exception", unexpected);
+            Assert.fail("unexpected exception: " + unexpected);
+        }
+        finally
+        {
+            job.getParameterList().clear();
+        }
+    }
+
     TapSchema mockTapSchema()
     {
         TapSchema ret = new TapSchema();
         SchemaDesc sd = new SchemaDesc("test");
         TableDesc foo = new TableDesc("test", "test.foo");
         TableDesc bar = new TableDesc("test", "test.bar");
+        TableDesc tables = new TableDesc("test", "test.tables");
         foo.getColumnDescs().add(new ColumnDesc("test.foo", "f1", TapDataType.INTEGER));
         foo.getColumnDescs().add(new ColumnDesc("test.foo", "f2", new TapDataType("char", "8", null)));
         bar.getColumnDescs().add(new ColumnDesc("test.bar", "b1", TapDataType.INTEGER));
         bar.getColumnDescs().add(new ColumnDesc("test.bar", "b2", new TapDataType("char", "8", null)));
+        tables.getColumnDescs().add(new ColumnDesc("test.tables", "size", new TapDataType("char", "8", null)));
         sd.getTableDescs().add(foo);
         sd.getTableDescs().add(bar);
+        sd.getTableDescs().add(tables);
         ret.getSchemaDescs().add(sd);
         return ret;
     }
