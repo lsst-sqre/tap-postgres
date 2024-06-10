@@ -8,7 +8,7 @@ Find changes for the upcoming release in the project's [changelog.d](https://git
 
 
 <a id='changelog-1.17.1'></a>
-## 1.16.0 (2024-06-10)
+## 1.17.1 (2024-06-10)
 
 ### Fixed
 
