@@ -6,7 +6,23 @@ Find changes for the upcoming release in the project's [changelog.d](https://git
 
 <!-- scriv-insert-here -->
 
-<a id='changelog-8.1.0'></a>
+
+<a id='changelog-1.17.1'></a>
+## 1.16.0 (2024-06-10)
+
+### Fixed
+
+- Added PgsphereDeParser to AdqlQueryImpl / Fixes issue with queries having quotes around column names ("size")
+
+<a id='changelog-1.17.0'></a>
+## 1.17.0 (2024-06-07)
+
+## Changed
+
+- Bump cadc dependency versions & switch to using cadc-tomcat image by @stvoutsin in #28
+
+
+<a id='changelog-1.16.0'></a>
 ## 1.16.0 (2024-05-30)
 
 ### New features
