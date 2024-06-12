@@ -91,15 +91,12 @@ public class UWSInitAction extends InitAction {
     @Override
     public void doInit() {
         DataSource uws = null;
-        Connection conn = null;
-        try {
+         try {
             uws = DBUtil.findJNDIDataSource("jdbc/uws");
-            conn = uws.getConnection();
-            if (!schemaExists(conn, "uws")) {
+            if (!schemaExists(uws, "uws")) {
                 log.info("uws schema does not exist, creating...");
-                createSchema(conn, "uws");
+                createSchema(uws, "uws");
                 log.info("uws schema created");
-
                 // Continue with initialization only if the schema was just created
                 InitDatabaseUWS uwsi = new InitDatabaseUWS(uws, null, "uws");
                 uwsi.doInit();
@@ -110,6 +107,22 @@ public class UWSInitAction extends InitAction {
             }
         } catch (Exception ex) {
             throw new RuntimeException("INIT FAIL", ex);
+        } 
+    }
+
+    private boolean schemaExists(DataSource uws, String schemaName) throws SQLException {
+        Connection conn = null;
+        try {
+            conn = uws.getConnection();
+            DatabaseMetaData dbMetaData = conn.getMetaData();
+            ResultSet rs = dbMetaData.getSchemas();
+            while (rs.next()) {
+                if (schemaName.equalsIgnoreCase(rs.getString("TABLE_SCHEM").trim())) {
+                    return true;
+                }
+            }
+        } catch (Exception ex) {
+              throw new RuntimeException("Failed to check if schema exists", ex);
         } finally {
             if (conn != null) {
                 try {
@@ -119,23 +132,25 @@ public class UWSInitAction extends InitAction {
                 }
             }
         }
-    }
-
-    private boolean schemaExists(Connection conn, String schemaName) throws SQLException {
-        DatabaseMetaData dbMetaData = conn.getMetaData();
-        try (ResultSet rs = dbMetaData.getSchemas()) {
-            while (rs.next()) {
-                if (schemaName.equalsIgnoreCase(rs.getString("TABLE_SCHEM").trim())) {
-                    return true;
-                }
-            }
-        }
         return false;
     }
 
-    private void createSchema(Connection conn, String schemaName) throws SQLException {
-        try (java.sql.Statement stmt = conn.createStatement()) {
+    private void createSchema(DataSource uws, String schemaName) throws SQLException {
+        Connection conn = null;
+        try {
+            conn = uws.getConnection();
+            java.sql.Statement stmt = conn.createStatement();
             stmt.execute("CREATE SCHEMA " + schemaName);
+        } catch (Exception ex) {
+            throw new RuntimeException("Create Schema failed", ex);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    log.error("Failed to close connection", e);
+                }
+            }
         }
     }
 }

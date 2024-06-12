@@ -6,6 +6,16 @@ Find changes for the upcoming release in the project's [changelog.d](https://git
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-1.17.2'></a>
+## 1.17.2 (2024-06-10)
+
+### Fixed
+
+- Fixed Capabilities based on standard, mainly Table Access and authentication related
+
+### Changed
+
+- Refactor UWSInitAction class a bit, make sure each call in the schema init process is separate
 
 <a id='changelog-1.17.1'></a>
 ## 1.17.1 (2024-06-10)
