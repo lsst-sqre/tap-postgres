@@ -45,7 +45,7 @@ dependencies {
 
     // Switch out this to use any supported database instead of PostgreSQL.
     // ## START CUSTOM DATABASE ##
-    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.13'
+    implementation group: 'com.mysql', name: 'mysql-connector-j', version: '8.4.0'
     implementation 'org.postgresql:postgresql:42.2.2.jre7'
     implementation 'org.opencadc:cadc-tap-server-pg:[1.0.0,)'
     // ## END CUSTOM DATABASE ##
