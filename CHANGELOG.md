@@ -6,6 +6,13 @@ Find changes for the upcoming release in the project's [changelog.d](https://git
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-1.17.3'></a>
+## 1.17.3 (2024-06-18)
+
+### Changed
+
+- Upgrade MySQL connector to version 8.4.0
+
 <a id='changelog-1.17.2'></a>
 ## 1.17.2 (2024-06-10)
 
