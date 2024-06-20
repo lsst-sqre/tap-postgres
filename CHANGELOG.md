@@ -6,6 +6,17 @@ Find changes for the upcoming release in the project's [changelog.d](https://git
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-1.18.0'></a>
+## 1.18.0 (2024-06-24)
+
+### Changed
+
+- Change result handling, to use a redirect servlet. Addresses issue with async failing due to auth header propagation with clients like pyvo, topcat
+
+### Fixed
+
+- Fixed Capabilities handling. Use new CapGetAction & CapInitAction, modified by getting pathPrefix from ENV property
+
 <a id='changelog-1.17.3'></a>
 ## 1.17.3 (2024-06-18)
 
