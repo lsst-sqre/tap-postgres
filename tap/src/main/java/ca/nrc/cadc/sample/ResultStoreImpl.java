@@ -1,4 +1,3 @@
-
 /*
  ************************************************************************
  *******************  CANADIAN ASTRONOMY DATA CENTRE  *******************
@@ -94,7 +93,8 @@ public class ResultStoreImpl implements ResultStore {
     private String filename;
     private static final String bucket = System.getProperty("gcs_bucket");
     private static final String bucketURL = System.getProperty("gcs_bucket_url");
-
+    private static final String baseURL = System.getProperty("base_url");
+    private static final String pathPrefix = System.getProperty("path_prefix");
 
     @Override
     public URL put(final ResultSet resultSet,
@@ -135,14 +135,14 @@ public class ResultStoreImpl implements ResultStore {
     private OutputStream getOutputStream() {
         Storage storage = StorageOptions.getDefaultInstance().getService();
         BlobId blobId = BlobId.of(bucket, filename);
+
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("application/x-votable+xml").build();
         Blob blob = storage.create(blobInfo);
         return Channels.newOutputStream(blob.writer());
     }
 
     private URL getURL() throws MalformedURLException {
-        URL bucket = new URL(bucketURL);
-        return new URL(bucket, filename);
+        return new URL(baseURL + pathPrefix + "/results/" + filename);
     }
 
     @Override
@@ -157,4 +157,5 @@ public class ResultStoreImpl implements ResultStore {
     public void setFilename(String filename) {
         this.filename = filename;
     }
+
 }
