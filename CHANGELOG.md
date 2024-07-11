@@ -6,6 +6,13 @@ Find changes for the upcoming release in the project's [changelog.d](https://git
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-1.18.1'></a>
+## 1.18.1 (2024-07-11)
+
+## Changed
+
+- Change Postgres to v15 and base image to fedora (centos endoflife)
+
 <a id='changelog-1.18.0'></a>
 ## 1.18.0 (2024-06-24)
 
