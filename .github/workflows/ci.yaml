@@ -53,6 +53,6 @@ jobs:
         with:
           context: docker/cadc-postgresql-dev
           push: true
-          file: docker/cadc-postgresql-dev/Dockerfile.pg12
+          file: docker/cadc-postgresql-dev/Dockerfile.pg15
           tags: |
             ghcr.io/lsst-sqre/tap-postgres-db:${{ steps.vars.outputs.tag }}
