@@ -28,12 +28,11 @@ su -l postgres -c '/usr/pgsql-15/bin/postmaster -D /var/lib/pgsql/15/data' > $LO
 
 sleep 6
 if [ $INITDB == 1 ]; then
-    if [ -e /config/init-content-schemas.sh ]; then
-        cp /config/init-content-schemas.sh /usr/local/bin/
+    if [ -e /usr/local/bin/init-content-schemas.sh ]; then
         # create standard user(s), database(s), schema(s)
         su -l postgres -c '/bin/bash /usr/local/bin/pgdb-init-content.sh'
     else
-        echo "not found: /config/init-content-schemas.sh"
+        echo "not found: /usr/local/bin/init-content-schemas.sh"
     fi
 fi
 

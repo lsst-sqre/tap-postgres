@@ -6,6 +6,14 @@ Find changes for the upcoming release in the project's [changelog.d](https://git
 
 <!-- scriv-insert-here -->
 
+
+<a id='changelog-1.18.2'></a>
+## 1.18.2 (2024-07-12)
+
+## Fixed
+
+- Fix Postgres data database init scripts
+
 <a id='changelog-1.18.1'></a>
 ## 1.18.1 (2024-07-11)
 
