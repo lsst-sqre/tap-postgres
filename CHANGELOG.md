@@ -7,17 +7,26 @@ Find changes for the upcoming release in the project's [changelog.d](https://git
 <!-- scriv-insert-here -->
 
 
+<a id='changelog-1.18.3'></a>
+## 1.18.3 (2024-07-15)
+
+### Other changes
+
+- Remove unneeded cadc dependencies (issue with dali/stilts conflict)
+- Upgrade log4j (Log4j vulnerability)
+- Modified scriv settings 
+
 <a id='changelog-1.18.2'></a>
 ## 1.18.2 (2024-07-12)
 
-## Fixed
+### Fixed
 
 - Fix Postgres data database init scripts
 
 <a id='changelog-1.18.1'></a>
 ## 1.18.1 (2024-07-11)
 
-## Changed
+### Changed
 
 - Change Postgres to v15 and base image to fedora (centos endoflife)
 
