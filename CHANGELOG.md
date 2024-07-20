@@ -6,6 +6,12 @@ Find changes for the upcoming release in the project's [changelog.d](https://git
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-1.18.4'></a>
+## 1.18.4 (2024-07-19)
+
+### Fixed
+
+- Changed accessUrl use for /tables back to "base"
 
 <a id='changelog-1.18.3'></a>
 ## 1.18.3 (2024-07-15)
