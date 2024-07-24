@@ -6,6 +6,15 @@ Find changes for the upcoming release in the project's [changelog.d](https://git
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-1.18.5'></a>
+## 1.18.5 (2024-07-24)
+
+### Fixed
+
+- Changed QueryJobManager to use the IdentityManager available via the AuthenticationUtil class (OpenID in our case)
+- Upgrade version of uws-server to 1.2.21
+- Fixes issue with ownerID missing
+
 <a id='changelog-1.18.4'></a>
 ## 1.18.4 (2024-07-19)
 

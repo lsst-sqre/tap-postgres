@@ -7,6 +7,10 @@ import ca.nrc.cadc.uws.server.JobExecutor;
 import ca.nrc.cadc.uws.server.impl.PostgresJobPersistence;
 import ca.nrc.cadc.uws.server.SimpleJobManager;
 import ca.nrc.cadc.uws.server.ThreadPoolExecutor;
+import ca.nrc.cadc.auth.AuthenticationUtil;
+import ca.nrc.cadc.auth.IdentityManager;
+import ca.nrc.cadc.uws.server.JobPersistence;
+import ca.nrc.cadc.uws.server.RandomStringGenerator;
 
 
 /**
@@ -21,7 +25,9 @@ public class JobManager extends SimpleJobManager {
     public JobManager() {
         super();
 
-        PostgresJobPersistence jobPersist = new PostgresJobPersistence(new X500IdentityManager());
+        IdentityManager im = AuthenticationUtil.getIdentityManager();
+        // persist UWS jobs to PostgreSQL using default jdbc/uws connection pool
+        JobPersistence jobPersist = new PostgresJobPersistence(new RandomStringGenerator(16), im, true);
 
         // max threads: 6 == number of simultaneously running async queries (per
         // web server), plus sync queries, plus VOSI-tables queries
