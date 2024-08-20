@@ -68,16 +68,25 @@
 package ca.nrc.cadc.sample;
 
 import ca.nrc.cadc.tap.BasicUploadManager;
-
+import ca.nrc.cadc.tap.upload.UploadLimits;
 
 public class RubinUploadManagerImpl extends BasicUploadManager {
-
     /**
      * Default maximum number of rows allowed in the UPLOAD VOTable.
      */
     public static final int MAX_UPLOAD_ROWS = 100000;
 
+    public static final UploadLimits MAX_UPLOAD;
+
+    /**
+     * Use A filesize limit of 32 Mb using UploadLimits.
+     */
+    static {
+        MAX_UPLOAD = new UploadLimits(32 * 1024L * 1024L); // 32 Mb
+        MAX_UPLOAD.rowLimit = MAX_UPLOAD_ROWS;
+    }
+
     public RubinUploadManagerImpl() {
-        super(MAX_UPLOAD_ROWS);
+        super(MAX_UPLOAD);
     }
 }
