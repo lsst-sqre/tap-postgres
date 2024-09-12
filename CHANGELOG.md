@@ -6,6 +6,27 @@ Find changes for the upcoming release in the project's [changelog.d](https://git
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-1.18.6'></a>
+## 1.18.6 (2024-09-12)
+
+### Removed
+
+- Remove jcenter repo as it is obsolete and no longer used by cadc
+
+- Remove deprecated AuthenticatorImpl class
+
+### Added
+
+- Support for S3 bucket storage of async results
+
+### Changed
+
+- Switch RubinUploadManagerImpl to use UploadLimits and set a default filesize limit of 32Mb
+
+### Other Changes
+
+- Added mavenCentral and jCenter repos (match what we have in lsst-tap-service)
+
 <a id='changelog-1.18.5'></a>
 ## 1.18.5 (2024-07-24)
 
