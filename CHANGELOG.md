@@ -6,6 +6,13 @@ Find changes for the upcoming release in the project's [changelog.d](https://git
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-1.18.7'></a>
+## 1.18.7 (2024-11-01)
+
+### Fixed
+
+- Enable non GCS S3 support for TAP_UPLOAD
+
 <a id='changelog-1.18.6'></a>
 ## 1.18.6 (2024-09-12)
 
