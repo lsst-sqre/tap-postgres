@@ -6,6 +6,17 @@ Find changes for the upcoming release in the project's [changelog.d](https://git
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-1.19.0'></a>
+## 1.19.0 (2024-11-01)
+
+### Changed
+
+- Updated version of gms to >=1.0.14
+
+### Fixed
+
+- Label warning in Docker build
+
 <a id='changelog-1.18.7'></a>
 ## 1.18.7 (2024-11-01)
 
