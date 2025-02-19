@@ -6,6 +6,13 @@ Find changes for the upcoming release in the project's [changelog.d](https://git
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-1.20.0'></a>
+## 1.20.0 (2025-02-19)
+
+### Added
+
+-  Added /reg endpoint so that we don't have to use the external cadc web service
+
 <a id='changelog-1.19.0'></a>
 ## 1.19.0 (2024-11-01)
 
