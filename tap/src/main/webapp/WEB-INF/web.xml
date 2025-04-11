@@ -216,16 +216,6 @@
             <url-pattern>/results/*</url-pattern>
     </servlet-mapping>
     
-    <servlet>
-        <servlet-name>RubinRegistryServlet</servlet-name>
-        <servlet-class>ca.nrc.cadc.sample.RubinRegistryServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>RubinRegistryServlet</servlet-name>
-        <url-pattern>/reg/*</url-pattern>
-    </servlet-mapping>
-    
     <servlet-mapping>
             <servlet-name>AsyncServlet</servlet-name>
             <url-pattern>/async/*</url-pattern>
