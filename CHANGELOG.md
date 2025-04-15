@@ -6,6 +6,18 @@ Find changes for the upcoming release in the project's [changelog.d](https://git
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-1.21.0'></a>
+## 1.21.0 (2025-04-15)
+
+### Changed
+
+- Upgrade java to 11
+- Upgrade cadc dependencies
+
+### Removed 
+
+- Remove MaxRec, Registry and TableServlet implementations
+
 <a id='changelog-1.20.0'></a>
 ## 1.20.0 (2025-02-19)
 
