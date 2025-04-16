@@ -196,11 +196,15 @@
     <!-- VOSI-tables provides an XML document describing the schema/tables/columns; 
          This implementation uses the TAP_SCHEMA to find the required metadata -->
     <servlet>
-        <load-on-startup>3</load-on-startup>
         <servlet-name>TableServlet</servlet-name>
-        <servlet-class>ca.nrc.cadc.sample.RubinTableServlet</servlet-class>
+        <servlet-class>ca.nrc.cadc.rest.RestServlet</servlet-class>
+        <init-param>
+            <param-name>get</param-name>
+            <param-value>ca.nrc.cadc.vosi.actions.GetAction</param-value>
+        </init-param>
+        <load-on-startup>3</load-on-startup>
     </servlet>
-    
+
     <servlet-mapping>
             <servlet-name>SyncServlet</servlet-name>
             <url-pattern>/sync/*</url-pattern>
@@ -233,7 +237,7 @@
     
     <servlet-mapping>
         <servlet-name>TableServlet</servlet-name>
-        <url-pattern>/tables</url-pattern>
+        <url-pattern>/tables/*</url-pattern>
     </servlet-mapping>
 	
     <!-- TODO: since this resource allows a POST to change the logging level, 
