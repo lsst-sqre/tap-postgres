@@ -23,7 +23,6 @@ java {
 configurations {
     intTestCompile.extendsFrom testImplementation
     intTestRuntime.extendsFrom testRuntimeOnly
-    implementation.exclude group: 'uk.ac.starlink'
 
     runtimeOnly.exclude module: 'slf4j-reload4j'
     runtimeOnly.exclude module: 'reload4j'
@@ -70,6 +69,9 @@ dependencies {
     implementation 'org.opencadc:cadc-vosi:[1.4.6,)'
     implementation 'org.opencadc:cadc-dali:[1.2.24,)'
 
+    implementation 'uk.ac.starlink:stil:[4.0,5.0)'
+    implementation 'uk.ac.starlink:jcdf:[1.2.3,2.0)'
+    implementation 'uk.ac.starlink:stil:[4.0,5.0)'
     
     // Switch out this to use any supported database instead of PostgreSQL.
     // ## START CUSTOM DATABASE ##
