@@ -18,7 +18,7 @@ version = '1.1'
 
 configurations {
     // Ensure only local files are available to prevent collisions.
-    implementation.exclude group: 'uk.ac.starlink'
+    // implementation.exclude group: 'uk.ac.starlink'
 }
 
 dependencies {
@@ -41,6 +41,9 @@ dependencies {
     implementation 'org.opencadc:cadc-dali:[1.0,1.2.18)'
     implementation 'org.opencadc:cadc-dali-pg:0.3.1'
 
+    implementation 'uk.ac.starlink:stil:[4.0,5.0)'
+    implementation 'uk.ac.starlink:jcdf:[1.2.3,2.0)'
+    implementation 'uk.ac.starlink:stil:[4.0,5.0)'
     
     // Switch out this to use any supported database instead of PostgreSQL.
     // ## START CUSTOM DATABASE ##
