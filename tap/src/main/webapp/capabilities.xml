@@ -138,5 +138,5 @@
       <default unit="byte">33554432</default>
       <hard unit="byte">33554432</hard>
     </uploadLimit>
-
+  </capability>
 </vosi:capabilities>
