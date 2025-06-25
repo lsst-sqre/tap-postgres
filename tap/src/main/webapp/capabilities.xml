@@ -135,9 +135,8 @@
     </outputLimit>
     <!-- outputLimit for sync queries: no limit -->
     <uploadLimit>
-      <default unit="row">10000</default>
-      <hard unit="row">10000</hard>
+      <default unit="byte">33554432</default>
+      <hard unit="byte">33554432</hard>
     </uploadLimit>
-  </capability>
 
 </vosi:capabilities>
