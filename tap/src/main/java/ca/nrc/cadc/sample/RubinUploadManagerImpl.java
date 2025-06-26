@@ -74,8 +74,6 @@ public class RubinUploadManagerImpl extends BasicUploadManager {
     /**
      * Default maximum number of rows allowed in the UPLOAD VOTable.
      */
-    public static final int MAX_UPLOAD_ROWS = 100000;
-
     public static final UploadLimits MAX_UPLOAD;
 
     /**
@@ -83,7 +81,6 @@ public class RubinUploadManagerImpl extends BasicUploadManager {
      */
     static {
         MAX_UPLOAD = new UploadLimits(32 * 1024L * 1024L); // 32 Mb
-        MAX_UPLOAD.rowLimit = MAX_UPLOAD_ROWS;
     }
 
     public RubinUploadManagerImpl() {

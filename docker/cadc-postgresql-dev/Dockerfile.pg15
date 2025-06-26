@@ -1,7 +1,7 @@
 FROM fedora:40
 
 # external URLs; allow --build-arg switch
-ARG PGDG=https://download.postgresql.org/pub/repos/yum/reporpms/F-40-x86_64/pgdg-fedora-repo-latest.noarch.rpm
+ARG PGDG=https://download.postgresql.org/pub/repos/yum/reporpms/F-41-x86_64/pgdg-fedora-repo-latest.noarch.rpm
 ARG PGSPHERE=https://ws-cadc.canfar.net/vault/files/pdowler/rpms/pgsphere15-1.4.2-1.fc40.x86_64.rpm
 
 # install repositories, server, extensions
