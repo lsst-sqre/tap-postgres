@@ -77,7 +77,6 @@ import ca.nrc.cadc.tap.ResultStore;
 import ca.nrc.cadc.tap.TableWriter;
 import ca.nrc.cadc.tap.TapSelectItem;
 import ca.nrc.cadc.tap.TapQuery;
-import ca.nrc.cadc.tap.TapValidator;
 import ca.nrc.cadc.tap.UploadManager;
 import ca.nrc.cadc.tap.schema.SchemaDesc;
 import ca.nrc.cadc.tap.schema.TableDesc;
@@ -281,13 +280,6 @@ public class QueryRunner implements JobRunner
             diagnostics.add(new Result("diag", URI.create("uws:executing:"+dt)));
 
             // start processing the job
-            log.debug("invoking TapValidator for REQUEST and VERSION...");
-            TapValidator tapValidator = new TapValidator();
-            tapValidator.validateVersion(paramList);
-            if ("1.0".equals(tapValidator.getVersion()))
-                responseCodeOnUserFail = HttpURLConnection.HTTP_OK; // TAP-1.0
-            tapValidator.validate(paramList);
-
             DataSource queryDataSource = getQueryDataSource();
             DataSource tapSchemaDataSource = getTapSchemaDataSource();
             // this one is optional, so take care

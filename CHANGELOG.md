@@ -6,6 +6,13 @@ Find changes for the upcoming release in the project's [changelog.d](https://git
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-1.21.2'></a>
+## 1.21.2 (2025-06-26)
+
+### Changed
+
+- Remove row count from Upload class implementation and only advertise size limit in capabilities
+
 <a id='changelog-1.21.1'></a>
 ## 1.21.1 (2025-04-16)
 

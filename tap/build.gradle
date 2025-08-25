@@ -12,34 +12,63 @@ repositories {
     }
 }
 
-sourceCompatibility = 11
 group = 'org.opencadc'
 version = '1.1'
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
 configurations {
-    // Ensure only local files are available to prevent collisions.
+    intTestCompile.extendsFrom testImplementation
+    intTestRuntime.extendsFrom testRuntimeOnly
     implementation.exclude group: 'uk.ac.starlink'
+
+    runtimeOnly.exclude module: 'slf4j-reload4j'
+    runtimeOnly.exclude module: 'reload4j'
+
+    runtimeOnly.exclude group: 'com.sun.jersey'
+    runtimeOnly.exclude group: 'com.sun.jersey.contribs' 
+    runtimeOnly.exclude group: 'com.google.inject'
+    runtimeOnly.exclude group: 'com.google.inject.extensions'
+    runtimeOnly.exclude group: 'org.eclipse.jetty'
+    runtimeOnly.exclude group: 'io.netty'
+    runtimeOnly.exclude group: 'org.apache.kerby'
+    runtimeOnly.exclude group: 'org.yaml', module: 'snakeyaml'
+    runtimeOnly.exclude group: 'org.apache.httpcomponents'
+    
+    all {
+        exclude group: 'log4j', module: 'log4j'
+        exclude group: 'org.slf4j', module: 'slf4j-nop'
+        exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+        exclude group: 'ch.qos.logback', module: 'logback-classic'
+        exclude group: 'ch.qos.logback', module: 'logback-core'
+        exclude group: 'org.apache.logging.log4j', module: 'log4j-to-slf4j'
+    }
 }
 
 dependencies {
+    implementation 'log4j:log4j:1.2.17'
+    implementation 'org.slf4j:slf4j-log4j12:1.7.36'
 
+    implementation 'org.opencadc:cadc-log:[1.1.1,)'
     implementation 'org.opencadc:cadc-access-control-identity:[1.0.7,)'
-    implementation 'org.opencadc:cadc-adql:[1.1.14,)'
+    implementation 'org.opencadc:cadc-adql:1.1.15'
     implementation 'org.opencadc:cadc-dali-pg:0.3.1'
     implementation 'org.opencadc:cadc-log:[1.2.1,)'
-    implementation 'org.opencadc:cadc-gms:[1.0.14,2.0)'
-
+    implementation 'org.opencadc:cadc-gms:[1.0.17,2.0)'
+    implementation 'org.opencadc:cadc-dali-parquet:[0.5.0,)'
     implementation 'org.opencadc:cadc-rest:[1.4.3,)'
-    implementation 'org.opencadc:cadc-tap-schema:1.2.5'
-    implementation 'org.opencadc:cadc-tap:1.1.18'
-    implementation 'org.opencadc:cadc-tap-server:1.1.29'
-    implementation 'org.opencadc:cadc-tap-server-pg:1.1.0'
+    implementation 'org.opencadc:cadc-tap-schema:[1.2.6,)'
+    implementation 'org.opencadc:cadc-tap:1.1.20'
+    implementation 'org.opencadc:cadc-tap-server:[1.1.32,)'
+    implementation 'org.opencadc:cadc-tap-server-pg:1.1.1'
     implementation 'org.opencadc:cadc-util:[1.11.3,)'
     implementation 'org.opencadc:cadc-uws:[1.0.5,)'
     implementation 'org.opencadc:cadc-uws-server:[1.2.21,)'
     implementation 'org.opencadc:cadc-vosi:[1.4.6,)'
-    implementation 'org.opencadc:cadc-dali:[1.0,1.2.18)'
-    implementation 'org.opencadc:cadc-dali-pg:0.3.1'
+    implementation 'org.opencadc:cadc-dali:[1.2.24,)'
 
     
     // Switch out this to use any supported database instead of PostgreSQL.
