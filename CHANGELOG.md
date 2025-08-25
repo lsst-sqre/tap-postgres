@@ -6,6 +6,21 @@ Find changes for the upcoming release in the project's [changelog.d](https://git
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-1.22.0'></a>
+## 1.22.0 (2025-08-25)
+
+### Changed
+
+- DM-51558: Fix upload limits, leave size limit and fix capabilities to show the right value (#58)
+
+- Bump actions/checkout from 4 to 5 (#60)
+
+- Upgraded tap-postgres dependencies (#59)
+
+- Enable Parquet output (#59)
+
+- Reduced logging
+
 <a id='changelog-1.21.2'></a>
 ## 1.21.2 (2025-06-26)
 
