@@ -6,6 +6,13 @@ Find changes for the upcoming release in the project's [changelog.d](https://git
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-1.23.0'></a>
+## 1.23.0 (2025-09-09)
+
+### Changed
+
+- Change ResultServlet to generate URL with bucket included
+
 <a id='changelog-1.22.0'></a>
 ## 1.22.0 (2025-08-25)
 
