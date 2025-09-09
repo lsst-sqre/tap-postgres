@@ -59,8 +59,12 @@ public class UploadManager implements UWSInlineContentHandler {
 
         // Construct return URL based on bucket type
         URL retURL;
-        retURL = new URL(bucketURL + "/" + bucket + "/" + filename);
-
+        if (bucket != null && !bucket.isEmpty()) {
+            retURL = new URL(bucketURL + "/" + bucket + "/" + filename);
+        } else {
+            retURL = new URL(bucketURL + "/" + filename);
+        }
+        
         Content ret = new Content();
         ret.name = UWSInlineContentHandler.CONTENT_PARAM_REPLACE;
         ret.value = new UWSInlineContentHandler.ParameterReplacement(
