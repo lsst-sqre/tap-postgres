@@ -6,6 +6,13 @@ Find changes for the upcoming release in the project's [changelog.d](https://git
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-1.23.1'></a>
+## 1.23.1 (2025-09-09)
+
+### Changed
+
+- Change Upload class to use bucket if available both when using GCS and S3
+
 <a id='changelog-1.23.0'></a>
 ## 1.23.0 (2025-09-09)
 
