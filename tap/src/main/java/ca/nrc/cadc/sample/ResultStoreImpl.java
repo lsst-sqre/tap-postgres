@@ -166,13 +166,7 @@ public class ResultStoreImpl implements ResultStore {
     }
 
     private URL getURL() throws MalformedURLException {
-        String filepath = ""; 
-        if (bucketType.equals(new String("S3"))) {
-            filepath = "/" + bucket + "/" + filename;
-        } else {
-            filepath = filename;
-        }
-        return new URL(baseURL + pathPrefix + "/results/" + filepath);
+        return new URL(baseURL + pathPrefix + "/results/" + filename);
     }
 
     private URI getURI() {
