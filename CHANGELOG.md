@@ -6,6 +6,13 @@ Find changes for the upcoming release in the project's [changelog.d](https://git
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-1.23.2'></a>
+## 1.23.2 (2025-09-10)
+
+### Fixed
+
+- Change Result URL generation for async TAP queries to be consistent between GCS and S3
+
 <a id='changelog-1.23.1'></a>
 ## 1.23.1 (2025-09-09)
 
