@@ -6,6 +6,11 @@ Find changes for the upcoming release in the project's [changelog.d](https://git
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-1.23.3'></a>
+## 1.23.3 (2025-09-10)
+
+- Remove encoding for bucket in ResultServlet
+
 <a id='changelog-1.23.2'></a>
 ## 1.23.2 (2025-09-10)
 
