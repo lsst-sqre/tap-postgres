@@ -6,6 +6,13 @@ Find changes for the upcoming release in the project's [changelog.d](https://git
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-1.24.0'></a>
+## 1.24.0 (2025-09-30)
+
+### Changed
+
+- Make tap-postgres TAP service read-only
+
 <a id='changelog-1.23.3'></a>
 ## 1.23.3 (2025-09-10)
 
