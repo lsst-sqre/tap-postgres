@@ -7,5 +7,5 @@ set -exo pipefail
 cd tap
 
 # Build the TAP service and docker images.
-gradle --stacktrace --info clean assemble javadoc build test
+./gradlew --stacktrace --info clean assemble javadoc build test
 cp build/libs/*.war ../docker/tap/tap.war
