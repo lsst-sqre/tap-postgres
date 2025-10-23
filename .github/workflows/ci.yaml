@@ -12,8 +12,8 @@ jobs:
         platform:
           - arch: "amd64"
             runs_on: "ubuntu-latest"
-          - arch: "arm64"
-            runs_on: "ubuntu-24.04-arm"
+          # - arch: "arm64"
+          #   runs_on: "ubuntu-24.04-arm"
 
     # Only do Docker builds of ticket branches and tagged releases.
     if: startsWith(github.ref, 'refs/tags/') || startsWith(github.ref, 'refs/heads/tickets/')
