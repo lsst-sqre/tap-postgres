@@ -4,7 +4,16 @@ name: CI
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.platform.runs_on }}
+    outputs:
+      tag: ${{ steps.vars.outputs.tag }}
+    strategy:
+      matrix:
+        platform:
+          - arch: "amd64"
+            runs_on: "ubuntu-latest"
+          - arch: "arm64"
+            runs_on: "ubuntu-24.04-arm"
 
     # Only do Docker builds of ticket branches and tagged releases.
     if: startsWith(github.ref, 'refs/tags/') || startsWith(github.ref, 'refs/heads/tickets/')
@@ -37,7 +46,8 @@ jobs:
           push: true
           file: docker/tap/Dockerfile
           tags: |
-            ghcr.io/lsst-sqre/tap-postgres-service:${{ steps.vars.outputs.tag }}
+            ghcr.io/lsst-sqre/tap-postgres-service-${{ matrix.platform.arch }}:${{ steps.vars.outputs.tag }}
+          platforms: linux/${{ matrix.platform.arch }}
 
       - name: Build and push the UWS database image
         uses: docker/build-push-action@v6
@@ -46,7 +56,8 @@ jobs:
           push: true
           file: docker/uws/Dockerfile
           tags: |
-            ghcr.io/lsst-sqre/tap-postgres-uws:${{ steps.vars.outputs.tag }}
+            ghcr.io/lsst-sqre/tap-postgres-uws-${{ matrix.platform.arch }}:${{ steps.vars.outputs.tag }}
+          platforms: linux/${{ matrix.platform.arch }}            
 
       - name: Build and push the mock postgres image
         uses: docker/build-push-action@v6
@@ -55,4 +66,26 @@ jobs:
           push: true
           file: docker/cadc-postgresql-dev/Dockerfile.pg15
           tags: |
-            ghcr.io/lsst-sqre/tap-postgres-db:${{ steps.vars.outputs.tag }}
+            ghcr.io/lsst-sqre/tap-postgres-db-${{ matrix.platform.arch }}:${{ steps.vars.outputs.tag }}
+          platforms: linux/${{ matrix.platform.arch }}            
+
+  reunify:
+    needs: [build]
+    runs-on: ubuntu-latest
+    env:
+      tag: ${{ needs.build.outputs.tag }}
+    strategy:
+      matrix:
+        image:
+          - "tap-postgres-service"
+          - "tap-postgres-uws"
+          - "tap-postgres-db"
+    steps:
+      - id: unify
+        uses: Noelware/docker-manifest-action@v1
+        with:
+          inputs: ghcr.io/lsst-sqre/${{matrix.image}}-amd64:${{ env.tag }},ghcr.io/lsst-sqre/${{matrix.image}}-arm64:${{ env.tag }}
+          tags: ghcr.io/lsst-sqre/${{ matrix.image }}:${{ env.tag }}
+          push: true
+
+        
