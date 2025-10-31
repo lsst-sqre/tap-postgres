@@ -63,15 +63,15 @@ jobs:
             ghcr.io/lsst-sqre/tap-postgres-uws-${{ matrix.platform.arch }}:${{ steps.vars.outputs.tag }}
           platforms: linux/${{ matrix.platform.arch }}            
 
-      - name: Build and push the mock postgres image
-        uses: docker/build-push-action@v6
-        with:
-          context: docker/cadc-postgresql-dev
-          push: true
-          file: docker/cadc-postgresql-dev/Dockerfile.pg15
-          tags: |
-            ghcr.io/lsst-sqre/tap-postgres-db-${{ matrix.platform.arch }}:${{ steps.vars.outputs.tag }}
-          platforms: linux/${{ matrix.platform.arch }}            
+      # - name: Build and push the mock postgres image
+      #   uses: docker/build-push-action@v6
+      #   with:
+      #     context: docker/cadc-postgresql-dev
+      #     push: true
+      #     file: docker/cadc-postgresql-dev/Dockerfile.pg15
+      #     tags: |
+      #       ghcr.io/lsst-sqre/tap-postgres-db-${{ matrix.platform.arch }}:${{ steps.vars.outputs.tag }}
+      #     platforms: linux/${{ matrix.platform.arch }}            
 
   reunify:
     needs: [build]
@@ -83,7 +83,6 @@ jobs:
         image:
           - "tap-postgres-service"
           - "tap-postgres-uws"
-          - "tap-postgres-db"
     steps:
       - id: unify
         uses: Noelware/docker-manifest-action@v1
@@ -92,4 +91,18 @@ jobs:
           tags: ghcr.io/lsst-sqre/${{ matrix.image }}:${{ env.tag }}
           push: true
 
+  build-postgres:
+    # CADC needs to give us an arm build of postgresql-dev first.
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Build and push the mock postgres image
+        uses: docker/build-push-action@v6
+        with:
+          context: docker/cadc-postgresql-dev
+          push: true
+          file: docker/cadc-postgresql-dev/Dockerfile.pg15
+          tags: |
+            ghcr.io/lsst-sqre/tap-postgres-db:${{ needs.build.outputs.tag }}
+  
         
