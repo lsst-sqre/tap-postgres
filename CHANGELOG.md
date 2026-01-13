@@ -6,6 +6,19 @@ Find changes for the upcoming release in the project's [changelog.d](https://git
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-1.25.0'></a>
+## 1.25.0 (2026-01-13)
+
+### Added
+
+- Added registry dependency to gradle file
+
+### Changed
+
+- Change Dockerfile to use cadc-tomcat base image 1.3
+- Changed build script to use gradlew to ensure we are building with version 8.5 of gradle
+- Adjust build.gradle configuration for newer version of gradle
+
 <a id='changelog-1.24.0'></a>
 ## 1.24.0 (2025-09-30)
 
