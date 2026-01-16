@@ -6,6 +6,11 @@ Find changes for the upcoming release in the project's [changelog.d](https://git
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-1.25.1'></a>
+## 1.25.1 (2026-01-16)
+
+- Upgrade CADC ependencies
+
 <a id='changelog-1.25.0'></a>
 ## 1.25.0 (2026-01-13)
 

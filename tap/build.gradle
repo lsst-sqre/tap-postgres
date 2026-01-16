@@ -34,7 +34,7 @@ configurations {
     runtimeOnly.exclude module: 'reload4j'
 
     runtimeOnly.exclude group: 'com.sun.jersey'
-    runtimeOnly.exclude group: 'com.sun.jersey.contribs' 
+    runtimeOnly.exclude group: 'com.sun.jersey.contribs'
     runtimeOnly.exclude group: 'com.google.inject'
     runtimeOnly.exclude group: 'com.google.inject.extensions'
     runtimeOnly.exclude group: 'org.eclipse.jetty'
@@ -42,7 +42,7 @@ configurations {
     runtimeOnly.exclude group: 'org.apache.kerby'
     runtimeOnly.exclude group: 'org.yaml', module: 'snakeyaml'
     runtimeOnly.exclude group: 'org.apache.httpcomponents'
-    
+
     all {
         exclude group: 'log4j', module: 'log4j'
         exclude group: 'org.slf4j', module: 'slf4j-nop'
@@ -68,13 +68,13 @@ dependencies {
     implementation 'org.opencadc:cadc-rest:[1.4.3,)'
     implementation 'org.opencadc:cadc-tap-schema:[1.2.6,)'
     implementation 'org.opencadc:cadc-tap:1.1.20'
-    implementation 'org.opencadc:cadc-tap-server:[1.1.32,)'
+    implementation 'org.opencadc:cadc-tap-server:[1.1.38,)'
     implementation 'org.opencadc:cadc-tap-server-pg:1.1.1'
-    implementation 'org.opencadc:cadc-util:[1.11.3,)'
+    implementation 'org.opencadc:cadc-util:[1.12.14,)'
     implementation 'org.opencadc:cadc-uws:[1.0.5,)'
     implementation 'org.opencadc:cadc-uws-server:[1.2.21,)'
     implementation 'org.opencadc:cadc-vosi:[1.4.6,)'
-    implementation 'org.opencadc:cadc-dali:[1.2.24,)'
+    implementation 'org.opencadc:cadc-dali:[1.2.28,)'
 
     
     // Switch out this to use any supported database instead of PostgreSQL.
