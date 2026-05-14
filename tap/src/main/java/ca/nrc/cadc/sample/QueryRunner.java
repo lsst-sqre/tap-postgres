@@ -447,6 +447,11 @@ public class QueryRunner implements JobRunner
                     catch (Throwable ignore) { }
                     try
                     {
+                        connection.rollback();
+                    }
+                    catch (Throwable ignore) { }
+                    try
+                    {
                         connection.close();
                     }
                     catch (Throwable ignore) { }
