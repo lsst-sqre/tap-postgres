@@ -6,6 +6,20 @@ Find changes for the upcoming release in the project's [changelog.d](https://git
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-1.26.1'></a>
+## 1.26.1 (2026-09-02)
+
+### Fixed
+
+- UWSInitAction now checks for the existence of the `uws.job` table rather than just the `uws` schema before initializing the UWS database. This ensures the UWS tables are created when the `uws` schema already exists but is empty, which happens when pointing at an external/managed Postgres where the schema was pre-provisioned.
+
+<a id='changelog-1.26.0'></a>
+## 1.26.0 (2026-03-16)
+
+### Changed
+
+- Update uws-server and postgresql dependencies
+
 <a id='changelog-1.25.1'></a>
 ## 1.25.1 (2026-01-16)
 
